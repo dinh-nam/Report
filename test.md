@@ -387,6 +387,24 @@ Là 1 tool chỉ được sử dụng bởi quản trị hoặc nhưng người 
 __iftop__ sẽ đo lường lưu lượng qua từng socket mạng riêng lẻ, tuy nhiên lại không trả được kết quả của từng tên hay ID cụ thể mà chỉ chung trên 1 cổng kết nối cụ thể nhưng iftop sẽ có lợi thế đặt các filter chỉ định trước qua đó lọc lưu lượng và trả kết quả băng thông đang sử dụng
 
 ![iftop](images/iftop.png)
+## - Xem nội dung không cần text editor
+Trong trường hợp các text editor không hoạt động như mong muốn nhưng user vẫn cần hiển thị nội dung file, có một vài lệnh giúp thực hiện việc đó
+### Cat
+Là 1 trong những lệnh cơ bản nhất khi mới làm quen Linux
+`cat` được dùng để hiển thị mọi nội dung của mọi file có trong máy mà không cần bất kì text editor nào
 
+![cat](images/cat.png)
+### less và more
+Bên cạnh `cat`, lệnh `less` và `more` là 2 lệnh được gợi ý nhiều nhất khi luyện tập thao tác trên Linux
+DÙ tương tự __cat__ chỉ để hiển thị nội dung file nhưng __less__ và __more__ lại có cách làm khác
+- `less` command:
 
+Hiển thị 1 trang nội dung file cho 1 lần, để tiếp tục cần nhấn __enter__ hoặc __space__
+Khi hiển thị hết sẽ tự quay về bản Terminal
+- Có 2 option chính khi dùng với __less__
+    1. `less -N [file]` giúp hiển thị số dòng 
+    1. `less -X [file]` giúp hiển thị hết nội dung mà không biến mất khi quay về Terminal
+- `more` command:
+
+__more__ khá giống với __less__ khi chỉ hiển thị 1 phần nội dung, để tiếp tục cần nhấn __enter__, tuy nhiên vào cuối file sẽ tự mất quá thoát khỏi trình hiển thị nội dung
 
