@@ -262,17 +262,57 @@ sudo snap install sublime-text --classic
  ```
  ![Emacs](images/emacs.png)
 
- 
+ ## Symbolic Link
+Đơn giản đây là 1 đường dẫn local trỏ đến vị trí file/foler được chỉ định
 
+Giúp user dễ dàng thao tác với terminal cũng như truy cập, quản lý file dễ dàng hơn, đặc biệt đây là file độc lập gốc nên dù bị xóa cũng không ảnh hưởng các file khác
+```
+ln -[option] [target file] [Symbolic filename]
+```
+|Command Switch         |	Mô tả                                               |
+|-----------------------|-------------------------------------------------------|
+|–backup[=CONTROL]      | 	backup từng file gốc                                |
+|-d, -F, –directory     | 	superuser được cho phép hard link                   |
+|-f, –force             | 	file đích bị xóa                                    |
+|-I, –interactive       | 	thông báo trước khi xóa file đích                   |
+|-L, –logical           | 	chọn file gốc là symbolic links                     |
+|-n, –non-dereference   | 	symbolic links tới thư mục được xem như là files    |
+|-P, –physical          | 	tạo hard links trực tiếp tới symbolic links         |
+|-r, –relative          | 	tạo symbolic links tương đối tới link location      |
+|-s, –symbol            |	tạo symbolic links thay vì hard links               |
+|-S, –suffix=SUFFIX     |	ghi đè lên backup suffix thông thường               |
+|-v, –verbose           |	in ra tên của từng linked file                      |
 
+- Symbolic link cho file
 
+![File](images/symbolic.png)
 
+- Symbolic link cho folder
 
+![Folder](images/symbolic-folder.png)
 
+Giống như việc tạo 1 shortcut, user có thể truy cập ngay file của folder đó ngay bên ngoài mà ko cần phải tìm kiếm dù các file đó nằm gần hay xa gốc tree-folder
 
+- Xóa symbolic link
 
+có thể dùng `unklink` hoặc `rm` với hiệu quả tương đương
+```
+unlink [symbolic link]
+rm [symbolic_link name]
+```
+## Hard link
 
+Bên cạnh symbolic link thì hard link(dạng liên kết cpấ độ thấp) cũng có những tính năng tương tự và syntax không thay đổi
+```
+ln [origin-file] [hardlink-file]
+```
 
-
-
+Tuy nhiên cả 2 cũng có 1 vài nhược điểm và có thể bù trừ cho nhau
+|Hard link                                                          | symbolic link     |
+|-------------------------------------------------------------------|-------------------|
+|Chỉ liên kết được tới file, không liên kết được tới thư mục        | 	Có thể liên kết được tới thư mục|
+|Không tham chiếu được tới file trên ổ đĩa khác                     | 	Có thể tham chiếu tới file/thư mục khác ổ đĩa|
+|Liên kết tới một file vẫn còn ngay cả khi file đó đã được di chuyển| 	Liên kết không còn tham chiếu được nữa nếu file được di chuyển|
+|Được liên kết với inode tham chiếu vật lý trên ổ cứng nơi chứa file| 	Liên kết tham chiếu tên file/thư mục trừu tượng mà không phải địa chỉ vật lý. Chúng được cung cấp inode riêng của mình|
+|Có thể làm việc với mọi ứng dụng                                   | 	Một số ứng dụng không cho phép symbolic link|
 
