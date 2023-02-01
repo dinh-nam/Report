@@ -315,4 +315,78 @@ Tuy nhiên cả 2 cũng có 1 vài nhược điểm và có thể bù trừ cho 
 |Liên kết tới một file vẫn còn ngay cả khi file đó đã được di chuyển| 	Liên kết không còn tham chiếu được nữa nếu file được di chuyển|
 |Được liên kết với inode tham chiếu vật lý trên ổ cứng nơi chứa file| 	Liên kết tham chiếu tên file/thư mục trừu tượng mà không phải địa chỉ vật lý. Chúng được cung cấp inode riêng của mình|
 |Có thể làm việc với mọi ứng dụng                                   | 	Một số ứng dụng không cho phép symbolic link|
+## - Nén-giải nén file/folder
+Là ứng dụng mặc định có sẵn trên OS, cho phép nén nhiều file với nhau để tạo file mới có dịnh dạng phù hợp (chủ yếu cho truyền tải dữ liệu)
+```
+zip [zip-name] [file 1] [file...n]
+unzip [zip-name]
+```
+![zip](images/zip-unzip.png)
+
+Giải nén tất cả trừ 1 file:
+```
+unzip [compress-file] [file-to stay]
+```
+
+Giải nén tất cả váo folder chỉ định:
+```
+unzip [compress-file] -d [desination folder] [file-to-stay]
+```
+Ghi đè file khi giải nén:
+```
+unzip -o [compress-file]
+```
+Liệt kê mọi file có trong file nén:
+```
+unzip -l [compress-file]
+```
+Kiểm tra, xác minh file khi giải nén:
+```
+unzip -t [compress-file] [file-to-stay]
+```
+Ngoài ra vẫn còn các option khác đi kèm lệnh `unzip -h`
+
+## - Đo lưu lượng mạng sử dụng
+Có rất nhiều tools phổ biến sử dụng để kiểm tra, đo lường băng thông lưu lượng mang đang sử dụng theo thời gian thực 
+
+Trong đó __netstat, nethogs__ và __nload__ được sử dụng phổ biến vì tính trực quan cũng như chi tiết thông số
+
+### Nethogs
+Điểm mạnh của __nethogs__ chính là do được lưu lượng theo PID riêng lẻ, giúp xác định, quản lý dễ dàng hơn từng task của từng user khác nhau đang sử dụng mạng
+
+![Nethogs](images/nethogs1.png)
+
+### Nload
+
+![nload](images/nload.png)
+
+Tính năng nổi bật của nó là hiển thị thông số trực quan
+Đo được lưu lượng tối thiểu-tối đa-trung bình-hiện tại và TimeToLive của gói
+
+Tuy nhiên __nload__ lại không thể đo chi tiết từng task hay user bằng PID như __nethogs__ do đó đã làm hạn chế khả năng của nó
+### Netstat
+Là 1 tool CLI phổ biến về đo lưu lượng mạng cùng với rất nhiều option khác nhau phục vụ cho hiển thị thông số, đo lường, kiểm tra khác nhau
+
+Dùng lệnh `netstat --help` để nắm rõ được các option có sẵn
+
+![netstat](images/netstat.png)
+
+Đây là 1 số option tiêu biểu được sử dụng trong __netstat__
+- __-a__: Hiển thị tất cả các sockets, kể cả listening và non-listening
+- __-l__: Hiển thị các socket đang lắng nghe
+- __-t__: Chỉ hiển thị các kết nối tcp
+- __-u__: Chỉ hiển thị các kết nối udp
+- __-n__: Xem địa chỉ số (không phân giải)
+- __-p__: Hiển thị chương trình PID cho từng socket
+- __-r__: Hiển thị bảng định tuyến
+- __-s__: Pull và hiển thị thống kê mạng được sắp xếp theo giao thức
+- __-i__: Hiển thị danh sách các giao diện mạng
+### Iftop
+Là 1 tool chỉ được sử dụng bởi quản trị hoặc nhưng người có đặc quyền giám sát, __iftop__ đo và lắng nghe lưu lượng băng thông mạng theo thời gian thực được gán tên chỉ định và hiển thị bảng thông số theo cặp ghép host
+
+__iftop__ sẽ đo lường lưu lượng qua từng socket mạng riêng lẻ, tuy nhiên lại không trả được kết quả của từng tên hay ID cụ thể mà chỉ chung trên 1 cổng kết nối cụ thể nhưng iftop sẽ có lợi thế đặt các filter chỉ định trước qua đó lọc lưu lượng và trả kết quả băng thông đang sử dụng
+
+![iftop](images/iftop.png)
+
+
 
