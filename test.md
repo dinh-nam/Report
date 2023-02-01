@@ -399,12 +399,21 @@ Bên cạnh `cat`, lệnh `less` và `more` là 2 lệnh được gợi ý nhi�
 DÙ tương tự __cat__ chỉ để hiển thị nội dung file nhưng __less__ và __more__ lại có cách làm khác
 - `less` command:
 
-Hiển thị 1 trang nội dung file cho 1 lần, để tiếp tục cần nhấn __enter__ hoặc __space__
-Khi hiển thị hết sẽ tự quay về bản Terminal
+Hiển thị 1 trang nội dung file cho 1 lần, để tiếp tục cần nhấn __enter__ hoặc __space__, để thoát nhấn _q_ rồi _enter_
+
 - Có 2 option chính khi dùng với __less__
     1. `less -N [file]` giúp hiển thị số dòng 
     1. `less -X [file]` giúp hiển thị hết nội dung mà không biến mất khi quay về Terminal
 - `more` command:
 
-__more__ khá giống với __less__ khi chỉ hiển thị 1 phần nội dung, để tiếp tục cần nhấn __enter__, tuy nhiên vào cuối file sẽ tự mất quá thoát khỏi trình hiển thị nội dung
+__more__ khá giống với __less__ khi chỉ hiển thị 1 phần nội dung, để tiếp tục cần nhấn __enter__, tuy nhiên vào cuối file sẽ tự mất và thoát khỏi trình hiển thị nội dung
+
+### head và tail
+2 lệnh này rất nhau và thường sử dụng để hiển thị số dòng nội dung đầu hoặc cuối file tương ứng
+
+Kết hợp option `-n[number-of-line]` để chọn hiển thị số dòng nội dung tùy ý
+```
+head -n 15 ./Document/text/txt (hiển thị 15 dòng nôi dung đầu file)
+tail -n 4 ./Desktop/memlist.txt (hiển thị 4 dòng nội dung cuối file)
+```
 
