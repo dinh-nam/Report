@@ -39,7 +39,7 @@ _**Cần thực hiện trên quyền root**_
 * `$ sudo ps -a`: hiển thị mọi tiến trình có trên máy, kèm PID, thời gian thực thiện và lệnh thực hiện 
 * `$ sudo ps -sa`: hiển thị ID tiến trình, ID unix của user, trạng trái thực thi, thời gian, lệnh thực hiện
 * `$ sudo ps -u`: hiển thị user, ID tiến trình, % hệ thống hoạt động, trạng thái, thời gian và lện thực hiện
-## Liệt kê danh sách file/folder
+## - Liệt kê danh sách file/folder
 
 Dùng lệnh `ls` để liệt kê các file hiện có tại vị trí trỏ hiện tại cùng các option có điều kiện:
 
@@ -262,7 +262,7 @@ sudo snap install sublime-text --classic
  ```
  ![Emacs](images/emacs.png)
 
- ## Symbolic Link
+ ## - Symbolic Link
 Đơn giản đây là 1 đường dẫn local trỏ đến vị trí file/foler được chỉ định
 
 Giúp user dễ dàng thao tác với terminal cũng như truy cập, quản lý file dễ dàng hơn, đặc biệt đây là file độc lập gốc nên dù bị xóa cũng không ảnh hưởng các file khác
@@ -300,9 +300,9 @@ có thể dùng `unklink` hoặc `rm` với hiệu quả tương đương
 unlink [symbolic link]
 rm [symbolic_link name]
 ```
-## Hard link
+## - Hard link
 
-Bên cạnh symbolic link thì hard link(dạng liên kết cpấ độ thấp) cũng có những tính năng tương tự và syntax không thay đổi
+Bên cạnh symbolic link thì hard link(dạng liên kết cấp độ thấp) cũng có những tính năng tương tự và syntax không thay đổi
 ```
 ln [origin-file] [hardlink-file]
 ```
