@@ -1,11 +1,11 @@
 # Tổng quan về Linux
-## Xem dung lượng Disk
+## - Xem dung lượng Disk
 1. Xem bằng ứng dụng mặc định trong ubuntu là “Disk Usage Analyzer” hoặc “Disks”
 ![Disk Usage Analyzer](images/disk.png)
 1. Xem bằng GUI Tools của bên thứ 3
 1. Dùng lệnh df (có thể kèm tham số -h cho các phần có thể đọc được)
 1. Hiển thị bao gồm các thông tin chi tiết về dung lượng disk còn trống, dung lượng đang sử dụng, thông tin về disk đang chạy, nhiệt độ,…
-## Xem phân vùng Disk
+## - Xem phân vùng Disk
 1. xem bằng GUI tools là Gparted
 ![Gparted](images/Gparted.png)
 1. Dùng lệnh cfdisk hoặc fdisk (chạy ở quyền root)
@@ -18,7 +18,7 @@ $ sudo fdisk --help
 ```
 ![fdisk](images/fdisk.png)
 
-## Xem thông tin phần cứng
+## - Xem thông tin phần cứng
 _**Toàn bộ thông tin được dùng bằng command line**_
 1. lscpu: cung cấp thông tin về cpu và các đơn vị xử lí liên quan
     ![lscpu](images/lscpu.png)
@@ -33,7 +33,7 @@ _**Toàn bộ thông tin được dùng bằng command line**_
 1. kiểm tra lượng ram trên máy dùng lệnh `free`, để dễ hiểu hơn sử dụng lệnh `free -m`
 * `ls option`: tổng hợp các option phổ biến khi dùng `ls`
 ![](images/ls%20option.png)
-## Theo dõi chi tiết tiến trình
+## - Theo dõi chi tiết tiến trình
 _**Cần thực hiện trên quyền root**_
 
 * `$ sudo ps -a`: hiển thị mọi tiến trình có trên máy, kèm PID, thời gian thực thiện và lệnh thực hiện 
@@ -47,10 +47,11 @@ Dùng lệnh `ls` để liệt kê các file hiện có tại vị trí trỏ hi
 
 ![ls option](images/ls_option.png)
 
-## Tương tác với file/folder
+## - Tương tác với file/folder
 * Sao chép: lệnh `cp` để sao chép file/ folder mới được chỉ định trước vào vị trí mới 
 
 ![copy file](images/copy.png)
+
 syntax: `cp -R <source_folder> <destination_folder>`
 * Với trường hợp sao chép vào phân vùng backup hay remotely host server dùng 2 lệnh sau:(yêu cầu thực hiện sudo apt-get install rsync )
 ```
@@ -90,7 +91,7 @@ Có thể kết hợp lệnh `mv` và `rm`(remove) để lọc file tốt hơn
 Ngoài ra lệnh `locate` cũng được dùng tương đương lệnh `find`, nhưng thời gian nhanh hơn do dùng cơ sở dữ liệu xây dựng từ trước, trong khi `find` quét hệ thống theo thời gian thực 
 
 ![find](images/find.png)
-## Phân quyền cơ bản và phân quyền nâng cao
+## - Phân quyền cơ bản và phân quyền nâng cao
 
 ```
 $ sudo ls -l <file>
@@ -131,7 +132,7 @@ hoặc `chmod u=rwx,g=r,o=r task 1.odt` (symbolic mode)
 
 ![chmod](images/chmod.png)
 
-Để thây đổi phân quyền nâng cao , sử dụng lệnh `chown`, cụ thể có thể thay được group và owner ban đầu (yêu cầu quyền root)
+Để thây đổi phân quyền nâng cao , sử dụng lệnh `chown`, có thể thay được group và owner ban đầu (yêu cầu quyền root)
 
 ```
 $ sudo chown [new-user] [file]
@@ -139,7 +140,7 @@ $ sudo chgrp [new-group] [file]
 ```
 ![](images/permission.png)
 
-## Mount và Umount
+## - Mount và Umount
 Để kiểm tra phân vùng ổ cứng, dùng lệnh `lsblk` để hiển thị toàn bộ phân vùng đang có trên máy
 
 Có 2 cách mount ổ cứng bằng device file hoặc UUID của ổ cứng đó
@@ -161,3 +162,117 @@ thêm lệnh mount vào cuối file hoặc dùng `echo` thay thế
 UUID =[uuid của ổ cần mount] [/file-to-mount] ext4 default 0 0
 ```
 Sau đó lưu lại chỉnh sửa file và dùng lệnh ` $ sudo mount -a` để hoàn tất
+ ## - Các trình text editor 
+ Có rất nhiều trình text editor khác nhau trên cả version Ubuntu chính thức và các bản mở rộng, tùy biến khác
+ Trong đó có 5 trình text editor phổ biến được sử dụng nhiều nhất:
+ 1. Vim/Vi
+ 1. Nano
+ 1. Gedit
+ 1. Emacs
+ 1. Sublime Text
+
+Để hình dung rõ hơn giao diện làm việc của từng text editor, ví dụ có file "test1.txt" ở trong đường dẫn `/Desktop/123` như sau:
+
+![](images/text-content.png)
+
+### Vim/Vi
+Sử dụng lệnh `vi [file]` (trong 1 số trường hợp, `vi` là text editor mặc định thay cho vim buộc phải cài đặt và ngược lại)
+
+![Vim](images/text-content2.png)  --------- Giao diện của Vim editor ---------
+
+Vim có 2 mode: 
+- Command mode: nội dung trong file được xem là các lệnh cần thực thi, đây cũng chính là mode mặc định khi mở file text bất kì
+
+![](images/bash-file.png)
+
+- Insert mode: cho phép user chỉnh sửa nội dung trong file, để vào mode này nhấn nút __Esc__ để thoát command mode sau đó nhấn nút __"i"__ để chỉnh sửa nội dung
+
+![](images/after-edit.png)
+
+Và để thực thi các lệnh trong file, cần dùng lệnh:
+```
+$ sudo bash [file]
+```
+![](images/bash-content.png)
+
+Kết quả khi áp dụng cho file __test1.txt__ thấy được phân quyền owner và group đã thay đổi từ __nam123__ thành __nam__
+
+Ngoài ra còn có rất nhiều command khác phục vụ cho Insert mode
+có thể tham khảo tại [Basic Vi Commands](https://www.cs.colostate.edu/helpdocs/vi.html)
+### Nano
+Nano là một trình chỉnh sửa trực tiếp. Nó được thiết kế cho cả người mới bắt đầu và người dùng nâng cao và có nhiều tính năng tùy biến.
+```
+nano [file]
+```
+![Nano](images/nano-file.png)
+
+Mặc định khi dùng `nano` để mở file sẽ ở dạng _modified_
+### Gedit
+Đây là trình text editor mặc định cho mội trường GNOME desktop
+
+Khi mở file text bất kì, trình editor Gedit sẽ là ưu tiên 
+
+Gedit có đầy đủ các tính năng cơ bản của trình soạn thảo văn bản tiêu chuẩn với giao diện đơn giản hơn
+
+Ngoài ra Gedit có thể  hỗ trợ 1 vài ngôn ngữ lập trình và hầu hết các dạng họ font chữ
+
+Có 2 cách sử dụng Gedit: double click vào file cần mở hoặc dùng lệnh `gedit [file]` mở trực tiếp
+
+![Gedit](images/Gedit.png)
+### Sublime Text
+
+Đây là dạng soạn thảo văn bản dựa trên IDE rất phổ biến
+
+Sublime có hỗ trợ nhiều plug-in dành cho lập trình và mark-up
+
+Có 1 số tính năng khác:
+- Có sẵn hệ thống bản lệnh đa đạng
+- Là API dựa trên Python
+- Hỗ trợ edit code song song
+- Có 1 số option riêng cho R&D dự án
+
+Tương tự Gedit, sublime có mở từ kho ứng dụng hoặc command `subl` (yêu cầu cài đặt trước)
+
+![Sublime](images/sublime.png)
+
+```
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -  
+
+sudo apt-get install apt-transport-https  
+
+echo "deb https://download.sublimetext.com/ apt/stable/" |  
+ sudo tee /etc/apt/sources.list.d/sublime-text.list  .
+
+apt-get update  
+
+sudo snap install sublime-text --classic
+```
+### GNU Emacs
+ Được xem là trình text editor lâu đời nhất nhưng độ phổ biến vẫn rất cao nhờ tính ổn định cũng như sự tối ưu và đơn giản của nó
+
+ Ngoài ra còn có 1 số tính năng khác:
+ - Tích hợp option mail và tin tức
+ - Tính năng mở rộng về giao diện debugger
+ - Cung cấp và hỗ trợ gói văn bản mở rộng
+
+ Do không được tích hợp sẵn vào OS nên cần cài đặt trước
+ ```
+ sudo apt update
+ sudo apt-get install emacs
+ ```
+ ![Emacs](images/emacs.png)
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
