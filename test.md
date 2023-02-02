@@ -608,4 +608,104 @@ Trong đó: `killall` sẽ ngắt toàn bộ tiến trình mà có mang tên đ�
 
 Còn `pkill` sẽ gửi signal đến tiến trình dựa trên tên đó và  ngắt tiến trình mà có tên đầy đủ hoặc tên mẫu như chỉ định mà không cần dò PID cụ thể
 
+- sort
+
+Là lệnh sắp xếp nội dung của file bất kì
+```
+sort [option] [file-name]
+```
+|option | mô tả |
+|-----|-----|
+|-o|chuyển hướng output sang file được chỉ định|
+|-r|sắp xếp ngược|
+|-n|sắp xếp ký tự số|
+|-nr|đảo ngược thứ tự với `-n`|
+|-k [column+sort type]|sắp xếp dạng bảng có điều kiện|
+|-u|sắp xếp và bỏ lặp|
+|-M|xếp theo tháng|
+
+- cut
+```
+cut OPTION... [FILE]...
+```
+Lệnh cho phép cắt ký tự trong cùng 1 mẫu nội dung của file từng byte, xem thêm ở `cut --help`
+
+Ví dụ
+```
+$ cat state.txt
+Andhra Pradesh
+Arunachal Pradesh
+Assam
+Bihar
+Chhattisgarh
+```
+với option `-b` tính bằng byte và phép thử :
+```
+$ cut -b 1,2,3 state.txt
+And
+Aru
+Ass
+Bih
+Chh
+```
+với option `-c` cắt theo cột ký tự và phép thử :
+```
+$ cut -c 2,5,7 state.txt
+nr
+rah
+sm
+ir
+hti
+```
+- uniq 
+
+Là dòng lệnh báo cáo hoặc lọc các dòng nội dung bị trùng trong file
+```
+uniq [TÙY CHỌN] [INPUT[OUTPUT]]
+```
+Nếu user không chỉ định mục input và output, uniq sẽ dùng I/O tiêu chuẩn
+
+-c – -count : Nó cho biết số lần một dòng được lặp lại bằng cách hiển thị một số dưới dạng tiền tố của dòng đó.
+
+-d – -repeated : Nó chỉ in các dòng lặp lại chứ không in các dòng không lặp lại.
+
+-D – -all-repeated[=method] : Nó in tất cả các dòng trùng lặp và [method] có thể là bất kỳ cách nào sau đây: 
+
+    - none : Hoàn toàn không phân định các dòng trùng lặp. Đây là mặc định.
+
+    - seperate : Chèn một dòng trống trước mỗi tập hợp các dòng trùng lặp.
+
+    - riêng biệt : Chèn một dòng trống giữa mỗi tập hợp các dòng trùng lặp.
+
+-f N – -skip-fields(N): Nó cho phép bạn bỏ qua N trường (một trường là một nhóm ký tự, được phân cách bằng khoảng trắng) của một dòng trước khi xác định tính duy nhất của một dòng.
+
+-i – -ignore case : Theo mặc định, các phép so sánh được thực hiện có phân biệt chữ hoa chữ thường nhưng với tùy chọn này có thể thực hiện các phép so sánh không phân biệt chữ hoa chữ thường.
+
+-s N – -skip-chars(N) : Nó không so sánh N ký tự đầu tiên của mỗi dòng trong khi xác định tính duy nhất. Điều này giống như tùy chọn -f, nhưng nó bỏ qua các ký tự riêng lẻ thay vì các trường.
+
+-u – -unique : Nó cho phép bạn chỉ in các dòng duy nhất.
+
+-z – -zero-terminated : Nó sẽ tạo một dòng kết thúc bằng 0 byte (NULL), thay vì một dòng mới.
+
+-w N – -check-chars(N): Nó chỉ so sánh N ký tự trong một dòng.
+
+– – help : Nó hiển thị một thông báo trợ giúp và thoát ra.
+
+– – version : Nó hiển thị thông tin phiên bản và thoát.
+
+- sed
+
+Viết tắt của từ stream editor, là 1 lệnh cho phép chỉnh sửa ngay trên file như tìm, thay thế, sửa, xóa, chèn,... Điều mà __sed__ làm nhanh hơn các trình text editor thông thường như __vi__ hay __nano__ là __sed__ có thể chỉnh sửa ngay trên file mà không cần mở chúng, nhưng hầu hết user dùng __sed__ để tìm kiếm và thay thế
+
+```
+sed OPTIONS... [SCRIPT] [INPUTFILE...] 
+```
+
+ join, 
+ diff, 
+ xargs, 
+ git, 
+
+
+
 
