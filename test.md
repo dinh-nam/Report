@@ -416,4 +416,38 @@ Kết hợp option `-n[number-of-line]` để chọn hiển thị số dòng n�
 head -n 15 ./Document/text/txt (hiển thị 15 dòng nôi dung đầu file)
 tail -n 4 ./Desktop/memlist.txt (hiển thị 4 dòng nội dung cuối file)
 ```
+## - Đổ  nội dung 1 chuỗi vào cuối file
+### 1. Chèn trực tiếp vào file
+Có 2 cách đề chèn nội dung mới vào cuối file bất kì
+- Sử dụng lệnh `cat >>`
+- sử dụng lệnh `tee`
 
+```
+cat >> [file-name or /path]
+```
+Cho phép user thêm nội dung mới (không ghi đè) vào cuối file
+
+![cat>>](images/cat%3E%3E.png)
+```
+tee -a [file-name or /path]
+```
+Tương tự lện __cat__ nhưng với option [-a] để tránh bị ghi đè nội dung cũ của file
+
+![tee](images/tee.png)
+
+### 2. Chèn nội dung từ file khác
+```
+cat [file-name or /path] | tee -a [file-name or /path]
+```
+Lệnh tee sẽ sao chép văn bản từ đầu vào (bên trái của lệnh) và ghi nó vào đầu ra (bên phải của lệnh) rồi trả lại kết quả sau khi chèn thành công
+
+![](images//cat%2Btee.png)
+
+Trong đó:
+Lệnh `cat` sẽ hiển thị đoạn text sẽ được thêm vào
+
+Lệnh `tee -a` để bất đầu chèn (không ghi đè) vào file chỉ định
+
+Trước đó, đoạn _**new text**_ sẽ được copy lại và chèn vào cuối file tại line mới sau đoạn _**origin text**_ để  thành đoạn _**after edit**_ của file mới
+## - Tìm hiểu Standard Input/Output/Error
+### Standard Input
