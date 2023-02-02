@@ -777,7 +777,7 @@ sudo smbpasswd -a [server-nam]
 ```
 Trở lại với máy host, ở mục kết nối máy chủ và nhập URL từ server:
 ```
-smb://[URL or IP]
+smb://[URL or IP] (ở đây dùng share file của sambasamba)
 ```
 Nếu có password buộc phải log in
 ## - SSH key-gen
