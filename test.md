@@ -706,6 +706,81 @@ sed OPTIONS... [SCRIPT] [INPUTFILE...]
  xargs, 
  git, 
 
+## - Thao tác với public host
+
+### 1. ssh
+Tạo máy server minimal
+cài ssh và active
+```
+sudo apt update
+sudo apt install openssh-server
+```
+Dùng 1 máy host khác mở terminal và chạy ssh kết nối vào server vừa tạo với IP vừa có
+```
+ssh [host-server-name]@[IP-server]
+```
+chọn yes để xác thực active ECDSA key
+
+### 2. telnet
+Trên host server:
+```
+sudo apt install telnetd -y
+systemctl status inetd  (xác thực trạng thái hoạt động của telnet)
+```
+Sau khi đảm bảo trạng thái hoạt động và _active_
+Bắt đầu mở port 23 TCP trong firewall
+```
+sudo ufw 23/tcp
+```
+Để kết nối vào server dùng lệnh
+```
+telnet [IP-server]
+```
+Về cơ bản __telnet__ sẽ khá giống __ssh__
+### 3. nmap
+
+Network Mapper được sử dụng để quản lý khoảng không gian mạng, lịch trình nâng cấp dịch vụ, giám sát máy chủ và thời gian hoạt động của dịch vụ.
+
+```
+sudo apt install nmap
+nmap --help (nắm rõ các option khi dùng nmap)
+```
+### 4. ping
+Việc ping giữa các host với nhau hay host-server đòi hỏi phải cùng mạng LAN
+Áp dụng ssh và telnet thành công thì ping ICMP chỉ là xác nhận mạng ổn định hay không
+
+### 5.share_file
+
+Sử dung share-file với tool Samba
+```
+sudo apt install samba
+```
+Theo đường dẫn vào sửa file:
+```
+sudo nano /etc/samba/smb.congf
+```
+Ở cuối file thêm đoạn code để tạo network phục vụ share file
+[share_file]
+        commanet = one for all
+        path = /home/nam/share_file
+        read only = no
+        browsable = yes
+
+Lưu thay đổi và restart lại service
+```
+sudo service smbd restart
+sudo ufw allow samba
+```
+Tùy trường hợp có đặt password hay không
+```
+sudo smbpasswd -a [server-nam]
+```
+Trở lại với máy host, ở mục kết nối máy chủ và nhập URL từ server:
+```
+smb://[URL or IP]
+```
+Nếu có password buộc phải log in
+## - SSH key-gen
 
 
 
