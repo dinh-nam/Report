@@ -450,4 +450,38 @@ Lệnh `tee -a` để bất đầu chèn (không ghi đè) vào file chỉ đị
 
 Trước đó, đoạn _**new text**_ sẽ được copy lại và chèn vào cuối file tại line mới sau đoạn _**origin text**_ để  thành đoạn _**after edit**_ của file mới
 ## - Tìm hiểu Standard Input/Output/Error
-### Standard Input
+Trên hầu hết các hệ điều hành nói chung và Linux/Unix nói riêng thì có 3 dòng xuất nhập chuẩn (I/O) là STDIN, STDOUT và STDERR mà chức năng tương ứng là dòng nhập chuẩn, dòng xuất chuẩn và dòng xuất lỗi chuẩn. Chúng được gọi là các open file và hệ thống gán cho mỗi file này một con số gọi là file descriptor. Ba con số tương ứng với 3 dòng xuất nhập chuẩn ở trên là 0, 1 và 2. Cụ thể:
+- standard input -> stdin -> 0<
+- standard output -> stdout -> 1>
+- standard error -> stderr -> 2>
+
+Trong hầu hết mọi OS thì _standard input_ là nơi dòng dữ liệu đi vào để xử lí từ trình chỉ đạo cố định mà điển hình là keyboard
+
+Đối với _standar output_ chính là  monitor, nơi dòng dữ liệu đi ra
+
+Còn _standard error_ cũng là monitor, nơi dòng xuất lỗi xuất ra
+
+![](images/diagram.jpg)
+
+### Redirection (chuyển hướng)
+Thay vì nhập xuất thông tin từ các thiết bị keyboard, monitor  theo chuẩn, thì chúng ta sẽ chuyển hướng nhập xuất đó bằng tệp tin hoặc tiến trình khác
+
+Một tiến trình linux gồm 3 luồng dữ liệu chuẩn: stdin, stdout và stderr
+
+Thì khi chuyển hướng chúng ta cũng có 3 luồng dữ chuyển hướng: input, output và error redirections
+- Redirecting Standard Input:
+Để chuyển hướng của __stdin__ sử dụng kí tự __"<"__
+- Redirecting Standard Output:
+Để chuyển hướng của __stdout__ sử dụng dấu __">"__ hoặc __"1>"__
+
+Trong trường hợp trống sẽ tạo file mới, nếu đã có file sẵn sẽ ghi đè lên file cũ, để không ghi đè file cũ cần dùng __">>"__ hoặc __"1>>"__
+
+- Redirecting Standard Error: 
+Thường dòng xuất lỗi luôn ra monitor trước, gây mất tính liền mạch khi quản lý thông tin, có thể chuyển hướng __stderr__ vào 1 file chung
+
+Sử dụng __"2>"__ hoặc __"2>>"__(tránh ghi đè) để chuyển hướng
+### /dev/null
+Trong một cài trường hợp, việc dòng xuất lỗi và dòng đầu ra hoạt động liên tục và có thể khiến file to hơn dần, hoặc đơn giản là user khi thực thi lệnh không muốn hiển thị thông tin output hay error
+
+Do đó giải pháp là chuyển hướng __"stdout"__ và __"stderr"__ đến __""/dev/null""__, là 1 file rỗng đặc biệt trong linux, nó sẽ tự động loại bỏ mọi file được đưa vào đây
+
