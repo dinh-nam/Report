@@ -485,3 +485,127 @@ Trong một cài trường hợp, việc dòng xuất lỗi và dòng đầu ra 
 
 Do đó giải pháp là chuyển hướng __"stdout"__ và __"stderr"__ đến __""/dev/null""__, là 1 file rỗng đặc biệt trong linux, nó sẽ tự động loại bỏ mọi file được đưa vào đây
 
+## -Các lệnh thường gặp
+- mkdir: tạo folder ở vị trí đường dẫn hiện tại của user
+- tee: chèn nội dung mới vào cuối file
+- ln: link file/folder thành 1 shortcut
+- ping: kiểm tra trạng thái mạng giữa thiết bị đầu cuối qua IP, cơ chế hoạt động gửi 1 loạt thông báo ICMP cho thiết bị từ host source tới host destination, qua đó đo thơi gian xử lý phản hồi tính bằng ms, xem được tình trạng mạng và lượng packet di chuyển ổn định hay không 
+- rsyn: sao chép file vào phân vùng backup hay server từ xa 
+- wc: word count đếm số từ có trong nội dung của file, số dòng và số bytes
+
+Option:
+
+-l: đếm toàn bộ kí tự 
+
+-m: đếm toàn bộ bố có mặt 
+
+-c: đếm số bytes t
+
+-w đếm số từ 
+
+- wget: công cụ hỗ trợ tải nội dung từ internet
+
+Bên cạnh đó có nhiều tính năng khác như: tải đa nội dung, chạy dưới nền, phục hồi tiến trình tải, giới hạn băng thông,... cũng như có thể kết hợp các lệnh khác trên Linux
+
+```
+wget [link-to-download]
+```
+__stdout__ của wget sẽ là thanh tiến trình tải
+
+1. Giao diện phía trên có bố cục ô chưa sau:
+1. tên file đang tải
+1. thanh tiến trình % tải thành công
+1. số file đang tải
+1. tốc độ mạng
+1. thời gian còn lại để hoàn thành
+
+```
+wget [option] [URL/isos.txt]
+```
+|option| Mô tả|
+|-----|-----|
+|-q|tắt mọi thông tin I/O trong quá trình tải|
+|-nv   |tinh giản thông tin I/O, để lại 1 số thông tin quan trọng   |
+|-c|phục hồi quá trình tải sau khi có sự cố làm mất internet|
+|-i|tải nhiều URL(chia mỗi link 1 dòng, gom vào 1 file là isos.txt)|
+|--limit-rate|giới hạn băng thông tải (`wget --limit-rate [number of rate]`)|
+|-b|tải dưới nền|
+|-o|chuyển hướng output của `wget`|
+|-a|chèn thêm vào log output của `wget`|
+
+Ngoài ra còn nhiều option khác tại [wget-optional](https://www.gnu.org/software/wget/manual/wget.html)
+
+- grep
+
+Là câu lệnh tìm kiếm mẫu kí tự và hiển thị toàn bộ các mẫu nội dung có chứa ký tự đó, `grep` là viết tắt của Global search for Regular Expression and Print out (G.R.E.P)
+
+|Options| Mô tả|
+|-----|-----|
+|-c | chỉ hiện vài dòng khớp với mẫu|
+|-h | hiện các dòng trùng khớp mà không hiện tên file|
+|-i | bỏ qua nội dung trùng|
+|-l | chỉ hiện danh sách tên file|
+|-n | hiện dòng trùng và số thứ tự dòng|
+|-v | hiện tất cả dòng không khớp mẫu |
+|-e exp | chỉ định biểủ thức option này và dùng nhiều lần|
+|-f file | lấy nhiều mẫu từ file, mỗi mẫy 1 dòng|
+|-E | xử lý mẫu ở dạng mở rộng (ERE)|
+|-w | khớp toàn từ|
+|-o | chỉ hiện phần khớp mẫu, mỗi lần 1 dòng|
+|-----|-----|
+|-A n | in dòng tìm kiếm được và số dòng sau kết quả|
+|-B n | Pin dòng tìm được|và số dòng trước kết quả
+|-C n | in dòng tìm được và số dòng xung quanh kết quả|
+
+- awk
+
+Là ngôn ngữ script dùng thể thao tác với dữ liệu và tạo mẫu báo cáo
+
+Thường dùng để scan và xử lý mẫu
+
+Có thể scan 1 hoặc nhiều file có chứ mẫu khớp hay không và thực thi các lệnh liên quan
+
+Cơ chế của `awk`: scan file theo từng dòng - chia nhỏ các input thành các field - so sánh với mẫu - thực thi lệnh tiếp sau
+```
+awk options 'selection _criteria {action }' input-file > output-file
+```
+-f : awk đọc từ file gốc thay vì từ dòng đầu tiên
+
+-fs : chia nhỏ các dòng input thành field
+
+- TR command
+
+Dạng lệnh hỗ trợ tùy chỉnh với các ký tự
+Hỗ trợ biến đổi chữ cái, gộp các ký tự bị lặp, tìm và thay thế cơ bản
+
+![TR](images/TR-command.png)
+
+Là tool dò đường, tạo 1 packet đi từ host source tới host destination, giúp user biết packet đã đi đường nào, qua các hop nào mà pcket này đã thực hiện
+```
+traceoute [option] [ip/domain]
+```
+|option | mô tả|
+|-----|-----|
+|-4|ipv4|
+|-6|ipv6|
+|-F|chống phân mảnh|
+|-g [gateway] |chỉ định packet đi qua gate|
+|-f [fisrt-ttl]|bắt đầu từ hop có ttl đầu tiên được chỉ định (khác 1)|
+|-m [max-ttl]|chỉ định packet qua số hop yêu cầu (max=30)|
+|-n |không phân giải IP thành domain|
+|-p |chỉ định port ở host destination dùng|
+|packetlen| chỉ định độ dài packet (max=60)|
+|-q [n]| chỉ định số lần dò khi qua 1 hop|
+
+- kill/killall/pkill
+
+Là lệnh ngắt tiến trình đang hoạt động trên hệ thống
+
+```
+kill/killall/pkill [option] [PID]
+```
+Trong đó: `killall` sẽ ngắt toàn bộ tiến trình mà có mang tên được chỉ định
+
+Còn `pkill` sẽ gửi signal đến tiến trình dựa trên tên đó và  ngắt tiến trình mà có tên đầy đủ hoặc tên mẫu như chỉ định mà không cần dò PID cụ thể
+
+
