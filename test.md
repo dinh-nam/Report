@@ -580,6 +580,8 @@ Hỗ trợ biến đổi chữ cái, gộp các ký tự bị lặp, tìm và th
 
 ![TR](images/TR-command.png)
 
+- traceroute
+
 Là tool dò đường, tạo 1 packet đi từ host source tới host destination, giúp user biết packet đã đi đường nào, qua các hop nào mà pcket này đã thực hiện
 ```
 traceoute [option] [ip/domain]
@@ -701,34 +703,74 @@ Viết tắt của từ stream editor, là 1 lệnh cho phép chỉnh sửa ngay
 sed OPTIONS... [SCRIPT] [INPUTFILE...] 
 ```
 
+- join
+
+Là lệnh được sử dụng để mối các dòng nội dung của 2 file trong cùng 1 folder
+```
+join [OPTION] FILE1 FILE2
+```
+Các option phổ biến khi dùng lệnh join:
+
+-a FILENUM : Ngoài ra, in các dòng không thể ghép nối từ tệp FILENUM, trong đó FILENUM là 1 hoặc 2, tương ứng với FILE1 hoặc FILE2.
+
+-e EMPTY : Thay thế các trường nhập bị thiếu bằng EMPTY.
+
+-i - -ignore-case : Bỏ qua sự khác biệt về chữ hoa chữ thường khi so sánh các trường.
+
+-j FIELD : Tương đương với "-1 FIELD -2 FIELD".
+
+-o FORMAT : Tuân theo FORMAT trong khi xây dựng dòng đầu ra.
+
+-t CHAR : Sử dụng CHAR làm dấu tách input và output field
+
+-v FILENUM : Giống như -a FILENUM, nhưng chặn các dòng output đã nối.
+
+-1 FIELD : Tham gia vào FIELD này của tệp 1.
+
+-2 FIELD : Tham gia vào FIELD này của tệp 2.
+
+--check-order :Kiểm tra xem inputo có được sắp xếp chính xác hay không, ngay cả khi tất cả các dòng input đều có thể ghép nối được. 
+
+--nocheck-order : Không kiểm tra xem input đã được sắp xếp chính xác chưa.
+
+--help : Hiển thị thông báo trợ giúp và thoát.
+
+--version : Hiển thị thông tin phiên bản và thoát.
+
 - diff
 
-Viết tắt của từ khác biệt, hiển thị sự khác nhau giữa các file bằng việc so sánh từng dòng nội dung
-Có 3 biểu tượng:
-1. a = add
-1. c = change
-1. d = delete
+Viết tắt của từ different (khác biệt), hiển thị sự khác nhau giữa các file bằng việc so sánh từng dòng nội dung Có 3 biểu tượng:
+
+a = add
+
+c = change
+
+d = delete
+
 ```
 diff [options] File1 File2 
 ```
 Ví dụ:
+```
 $ ls
 a.txt  b.txt
-=====
+==========
 $ cat a.txt
 Gujarat
 Uttar Pradesh
 Kolkata
 Bihar
 Jammu and Kashmir
-=====
+==========
 $ cat b.txt
 Tamil Nadu
 Gujarat
 Andhra Pradesh
 Bihar
 Uttar pradesh
-===== sử dụng lệnh __diff__ với không có option đi kèm sẽ có output như sau:
+```
+Sử dụng lệnh __diff__ với không có option đi kèm sẽ có output như sau:
+```
 $ diff a.txt b.txt
 0a1
 > Tamil Nadu
@@ -736,13 +778,38 @@ $ diff a.txt b.txt
 < Uttar Pradesh
  Andhra Pradesh
 5c5
- Uttar pradesh
- 
- Trong đó: 0                a       1
-        số thứ tự dòng      add     số thứ tự dòng tương ứng ở file 2
-        
- - xargs 
- - git 
+Uttar pradesh
+```
+Trong đó:
+|operation|description
+|-----|-----|
+|0|số thứ tự dòng tương ứng ở file 1|
+|a|add|
+|1| số thứ tự dòng tương ứng ở file 2|
+
+- xagrs
+```
+xargs [options] [command]
+```
+Là lệnh dùng để xây dựng và thực thi các lệnh khác từ __stdin__
+
+Tuy nhiên trong vài trường hợp __xargs__ có thể chấp nhận input dưới dạng tham số, nhưng một số lệnh chấp nhận dạng đối số, đây là nơi xargs xuất hiện.
+
+Các option phổ biến của __xargs__ :
+|option|description|
+|-----|-----|
+|-0|các mục input bị loại bỏ bởi _null_ thay vì là khoảng trắng|
+|-a [file]|đọc mục trực tiếp từ file thay vì đọc từ __stdin__|
+|-delimiter = delim|các mục input bị loại bỏ bợi ký tự đặc biệt|
+|-E eof-str|đặt cuối chuỗi file thành eof-str|
+|-l replace-str|thay lần xuất hiện của replace-str trong biến ban đầu bằng tên đọc từ __stdin__|
+|-L max-line|dùng tối đa các dòng input khác rỗng cho mỗi lệnh thực thi|
+|-p|nhắc user có chyạ từng lệnh và dọc một dòng từ terminal hay không|
+|-r|nếu __stdin__ không chứ khoảng trống, ngừng thực hiện lệnh|
+|-x|thoát nếu bị oversize|
+|-help|hiện các option và thoát|
+|-version|hiển thị version và thoát|
+
 
 ## - Thao tác với public host
 
@@ -753,11 +820,15 @@ cài ssh và active
 sudo apt update
 sudo apt install openssh-server
 ```
+![](images/install-ssh.png)
+
 Dùng 1 máy host khác mở terminal và chạy ssh kết nối vào server vừa tạo với IP vừa có
 ```
 ssh [host-server-name]@[IP-server]
 ```
 chọn yes để xác thực active ECDSA key
+
+![](images/ssh.png)
 
 ### 2. telnet
 Trên host server:
@@ -798,18 +869,24 @@ Theo đường dẫn vào sửa file:
 sudo nano /etc/samba/smb.congf
 ```
 Ở cuối file thêm đoạn code để tạo network phục vụ share file
+```
 [share_file]
+
         commanet = one for all
+
         path = /home/nam/share_file
+
         read only = no
+
         browsable = yes
+```
 
 Lưu thay đổi và restart lại service
 ```
 sudo service smbd restart
 sudo ufw allow samba
 ```
-Tùy trường hợp có đặt password hay không
+Tùy trường hợp có muốn đặt password hay không
 ```
 sudo smbpasswd -a [server-nam]
 ```
@@ -819,6 +896,40 @@ smb://[URL or IP] (ở đây đang dùng tool samba)
 ```
 Nếu có password buộc phải log in
 ## - SSH key-gen
+- Ở bên phía host client
 
+```
+ssh-keygen
+```
+Bắt đầu tạo key ssh giao tiếp  giữa server-client
 
+Hệ thống sẽ hỏi:
+```
+Enter file in which to save the key (/home/nam/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+```
+Đó là nơi chưa key mặc định và cần có password để bảo vệ (khuyến khích)
 
+Sau đó sao chép key
+```
+ssh-copy-id [username]@[IP-server]
+```
+Hệ thống sẽ thông báo add key thành công
+
+- Ở bên phía host server
+
+dùng host client và nối ssh đến server từ xa, vì key add thành công khi kết nối sẽ hiện bảng yêu cầu password từ key, nhập pass và log in
+
+Bắt đầu từ lần thứ 2 sẽ không cần phải xác thực nữa
+
+Tuy nhiên, password log in vào server vẫn tồn tại và vẫn hoạt động, do đó có thể vô hiệu hóa đi
+
+tại remote-server SSH, cần vào file config của ssh thay đổi
+```
+sudo nano /etc/ssh/sshd_config
+```
+Kéo xuống cuối file tìm mục `PasswordAuthentication yes` và thay bằng `no`
+
+Lưu lại thay đổi, từ lúc này cơ chế bảo mật cơ bản đã được tắt và thay vào đó sử dụng bằng ssh-key
+
+![](images/config-ssh.png)
