@@ -700,26 +700,6 @@ Viết tắt của từ stream editor, là 1 lệnh cho phép chỉnh sửa ngay
 ```
 sed OPTIONS... [SCRIPT] [INPUTFILE...] 
 ```
-- join
-- 
-Là lệnh được sử dụng để mối các dòng nội dung của 2 file trong cùng 1 folder
-```
-$join [OPTION] FILE1 FILE2
-```
-Các option phổ biến khi dùng lệnh __join__
-1. -a FILENUM : Ngoài ra, in các dòng không thể ghép nối từ tệp FILENUM, trong đó FILENUM là 1 hoặc 2, tương ứng với FILE1 hoặc FILE2.
-1. -e EMPTY : Thay thế các trường nhập bị thiếu bằng EMPTY.
-1. -i - -ignore-case : Bỏ qua sự khác biệt về chữ hoa chữ thường khi so sánh các trường.
-1. -j FIELD : Tương đương với "-1 FIELD -2 FIELD".
-1. -o FORMAT : Tuân theo FORMAT trong khi xây dựng dòng đầu ra.
-1. -t CHAR : Sử dụng CHAR làm dấu tách input và output field
-1. -v FILENUM : Giống như -a FILENUM, nhưng chặn các dòng output đã nối.
-1. -1 FIELD : Tham gia vào FIELD này của tệp 1.
-1. -2 FIELD : Tham gia vào FIELD này của tệp 2.
-1. --check-order :Kiểm tra xem inputo có được sắp xếp chính xác hay không, ngay cả khi tất cả các dòng input đều có thể ghép nối được.
-1. --nocheck-order : Không kiểm tra xem input đã được sắp xếp chính xác chưa.
-1. --help : Hiển thị thông báo trợ giúp và thoát.
-1. --version : Hiển thị thông tin phiên bản và thoát.
 
 - diff
 
@@ -835,7 +815,7 @@ sudo smbpasswd -a [server-nam]
 ```
 Trở lại với máy host, ở mục kết nối máy chủ và nhập URL từ server:
 ```
-smb://[URL or IP] (ở đây dùng share file của sambasamba)
+smb://[URL or IP] (ở đây đang dùng tool samba)
 ```
 Nếu có password buộc phải log in
 ## - SSH key-gen
