@@ -810,7 +810,11 @@ Các option phổ biến của __xargs__ :
 |-help|hiện các option và thoát|
 |-version|hiển thị version và thoát|
 
+- git
 
+__Git__ là hệ thống giám sát phân tán phổ biến, thường dùng trong việc dò code và đồng bộ mã source code
+
+__git__ gắn liền với rất nhiều thứ liên quan hệ thống lớn như __github__
 ## - Thao tác với public host
 
 ### 1. ssh
