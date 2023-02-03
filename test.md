@@ -804,7 +804,7 @@ Các option phổ biến của __xargs__ :
 |-E eof-str|đặt cuối chuỗi file thành eof-str|
 |-l replace-str|thay lần xuất hiện của replace-str trong biến ban đầu bằng tên đọc từ __stdin__|
 |-L max-line|dùng tối đa các dòng input khác rỗng cho mỗi lệnh thực thi|
-|-p|nhắc user có chyạ từng lệnh và dọc một dòng từ terminal hay không|
+|-p|nhắc user có chạy từng lệnh và dọc một dòng từ terminal hay không|
 |-r|nếu __stdin__ không chứ khoảng trống, ngừng thực hiện lệnh|
 |-x|thoát nếu bị oversize|
 |-help|hiện các option và thoát|
