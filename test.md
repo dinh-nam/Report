@@ -563,7 +563,7 @@ Là ngôn ngữ script dùng thể thao tác với dữ liệu và tạo mẫu b
 
 Thường dùng để scan và xử lý mẫu
 
-Có thể scan 1 hoặc nhiều file có chứ mẫu khớp hay không và thực thi các lệnh liên quan
+Có thể scan 1 hoặc nhiều file có chứa mẫu khớp hay không và thực thi các lệnh liên quan
 
 Cơ chế của `awk`: scan file theo từng dòng - chia nhỏ các input thành các field - so sánh với mẫu - thực thi lệnh tiếp sau
 ```
