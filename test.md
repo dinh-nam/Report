@@ -793,6 +793,8 @@ xargs [options] [command]
 ```
 Là lệnh dùng để xây dựng và thực thi các lệnh khác từ __stdin__
 
+Sau khi nhập điều kiện thực thi lệnh, nhấn Crtl + D để chuyển chỉ định sang lệnh cần thực thi
+
 Tuy nhiên trong vài trường hợp __xargs__ có thể chấp nhận input dưới dạng tham số, nhưng một số lệnh chấp nhận dạng đối số, đây là nơi xargs xuất hiện.
 
 Các option phổ biến của __xargs__ :
